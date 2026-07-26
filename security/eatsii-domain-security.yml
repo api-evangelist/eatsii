@@ -1,0 +1,68 @@
+generated: '2026-07-20'
+method: probed
+source: live DNS + TLS + HTTP probe of eatsii.com (2026-07-20)
+notes: >-
+  eatsii.com does not terminate TLS — port 443 aborts the handshake with a
+  TLSv1 internal error and presents no certificate. Port 80 answers from a
+  Network Solutions parking address (208.91.197.27) with a 195-byte
+  "Error. Page cannot be displayed." page. DNS is wildcarded: every probed
+  subdomain (www, api, docs, developer, developers, status, trust, app)
+  resolves to the same parking IP, and every probed path returns HTTP 200
+  with that identical error body (verified soft-404 against a control path).
+  No mail, sender-authentication, or certificate-authority policy records
+  are published.
+hosts:
+- host: eatsii.com
+  https: false
+  tls_version: null
+  tls_error: tlsv1 alert internal error (no peer certificate)
+  http: true
+  http_status: 200
+  http_server: parking (208.91.197.27, Network Solutions)
+  hsts: false
+  hsts_max_age: null
+domains:
+- domain: eatsii.com
+  dnssec: false
+  ds_records: []
+  caa: []
+  spf: false
+  dmarc: false
+  dmarc_policy: null
+  mx: []
+  nameservers:
+  - ns1.domain.com
+  - ns2.domain.com
+  registrar: Network Solutions, LLC
+  created: '2024-12-31'
+  expires: '2026-12-31'
+wildcard_dns: true
+well_known_probed:
+- path: /.well-known/security.txt
+  status: 200
+  real: false
+  note: soft-404 parking page
+- path: /.well-known/openid-configuration
+  status: 200
+  real: false
+  note: soft-404 parking page
+- path: /.well-known/oauth-authorization-server
+  status: 200
+  real: false
+  note: soft-404 parking page
+- path: /.well-known/api-catalog
+  status: 200
+  real: false
+  note: soft-404 parking page
+- path: /.well-known/ai-plugin.json
+  status: 200
+  real: false
+  note: soft-404 parking page
+- path: /llms.txt
+  status: 200
+  real: false
+  note: soft-404 parking page
+- path: /openapi.json
+  status: 200
+  real: false
+  note: soft-404 parking page
